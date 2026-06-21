@@ -103,6 +103,18 @@ An AI-powered Cold Email Generator that extracts job postings from company caree
 * ChromaDB
 * Pandas
 
+## Demo
+
+The application extracts job descriptions, matches portfolio projects using ChromaDB, and generates personalized cold emails.
+
+### Generated Email
+
+<p align="center">
+  <img src="app/resources/image.png" alt="Cold Email Generator Demo" width="900">
+</p>
+
+
+
 ## Setup
 
 ### Clone the repository
