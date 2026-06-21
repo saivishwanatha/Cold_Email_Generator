@@ -1,0 +1,23 @@
+# Environment variables
+.env
+app/.env
+
+# Python
+**pycache**/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ChromaDB
+vectorstore/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
