@@ -10,6 +10,90 @@ An AI-powered Cold Email Generator that extracts job postings from company caree
 * Generates personalized cold emails
 * Streamlit-based user interface
 
+
+## High Level Architecture
+
+```text
+┌─────────────────────┐
+│      User           │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Streamlit Frontend  │
+│  (main.py)          │
+└──────────┬──────────┘
+           │ URL
+           ▼
+┌─────────────────────┐
+│ WebBaseLoader       │
+│ (LangChain)         │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Text Cleaning       │
+│ (utils.py)          │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Job Extraction      │
+│ Groq + LangChain    │
+│ (chains.py)         │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Extracted Job Data  │
+│ Role, Skills, Desc  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ ChromaDB Portfolio  │
+│ Matching            │
+│ (portfolio.py)      │
+└──────────┬──────────┘
+           │ Relevant Projects
+           ▼
+┌─────────────────────┐
+│ Email Generation    │
+│ Groq LLM            │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Personalized Cold   │
+│ Email Output        │
+└─────────────────────┘
+```
+
+### Workflow
+
+1. User enters a job posting URL in the Streamlit application.
+2. LangChain's WebBaseLoader scrapes the job description from the webpage.
+3. The scraped content is cleaned and normalized.
+4. Groq LLM extracts structured job information:
+
+   * Role
+   * Experience
+   * Required Skills
+   * Description
+5. ChromaDB performs semantic search against the user's portfolio projects.
+6. Relevant portfolio links are retrieved.
+7. Groq LLM generates a personalized cold email using:
+
+   * Job description
+   * Required skills
+   * Matching portfolio projects
+8. The generated email is displayed in the Streamlit UI.
+
+```
+```
+
+
+
 ## Tech Stack
 
 * Python
@@ -35,11 +119,6 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
 
 ### Configure environment variables
 
@@ -67,5 +146,4 @@ app/
 
 vectorstore/
 README.md
-requirements.txt
 ```
